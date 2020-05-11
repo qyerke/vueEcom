@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     show: function(id){
-      this.$router.push({ path: 'show' })
+      this.$router.push('/show/' + id)
       //console.log(id)
     //   this.axios.post('http://laraapiecom/api/product/' + id).then((response) => {
     //   console.log(response.data)

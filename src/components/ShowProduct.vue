@@ -1,8 +1,16 @@
 <template>
   <div class="album py-5 bg-light">
-    <div class="container">
+    <div class="container" >
       <div class="row">
-          <h2>Product</h2>
+        <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{product['title']}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">${{product['price']}}</h6>
+          <p class="card-text">{{product['title']}}</p>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
       </div>
     </div>
   </div>
@@ -13,32 +21,17 @@ export default {
   name: 'ShowProduct',
   data () {
     return {
-      products: [],
+      product: '',
     }
   },
-  created: function () {
-    this.axios.get('http://laraapiecom/api/products').then((response) => {
-      console.log(response.data.data)
-      this.products = response.data.data
-    })
+  mounted() {
+    this.axios.post('http://laraapiecom/api/product', {
+        id: this.$route.params.id
+      })
+        .then(response => {
+          console.log(response.data)
+          this.product = response.data
+        })
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
